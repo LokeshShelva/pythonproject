@@ -75,8 +75,13 @@ WSGI_APPLICATION = 'miniproject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'CLIENT': {
+            'name': 'myFirstDatabase',
+            'host': 'mongodb+srv://Lokesh:iaLSailIM<@cluster0.j5abg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+            'username': 'Lokesh',
+            'password': 'iaLSailIM'
+        }    # mongodb+srv://Lokesh:<password>@cluster0.j5abg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
     }
 }
 
