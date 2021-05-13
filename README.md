@@ -7,6 +7,7 @@
  >```pip install -r requirements.txt```
 
 The file struction shoud be
+***
 [![Directory](https://i.postimg.cc/sDfV8xzD/Screenshot-2021-05-13-101842.png)](https://postimg.cc/ThSM5RhZ)
 
 ## Running the server
