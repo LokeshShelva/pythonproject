@@ -7,7 +7,7 @@
  >```pip install -r requirements.txt```
 
 The file struction shoud be
-![Directory](https://postimg.cc/ThSM5RhZ)
+[Directory](https://postimg.cc/ThSM5RhZ)
 
 ## Running the server
 
