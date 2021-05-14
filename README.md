@@ -13,9 +13,5 @@ The file struction shoud be
 ## Running the server
 
 * Navigate to the miniproject directory
-* Run the following commanda to setup database and make migrations
-> ```python manage.py makemigrations```
-
-> ```python manage.py migrate```
 * Run the following command to start the server
 >```python manage.py runserver```
