@@ -8,41 +8,45 @@ from bson.objectid import ObjectId
 def home(request):
     # p = Plot.objects.create(
     #     user=request.user,
-    #     type="B",
-    #     name="Graph 2",
+    #     type="C",
+    #     name="Compound Bar graph 1",
     #     yAxis={
-    #         "name": "Axis",
+    #         "name": "weight",
     #         "unit": "kg",
     #         "minRange": "0",
-    #         "maxRange": "10",
+    #         "maxRange": "25",
     #     },
     #     xAxis={
-    #         "name": "X axis",
-    #         "unit": "time",
-    #         "minRange": "0",
-    #         "maxRange": "20",
+    #         "name": "fruits",
+    #         "unit": "",
+    #         "minRange": "5",
+    #         "maxRange": "25",
     #     },
     #     data=[
     #         {
-    #             "name": "lime",
-    #             "value": "10",
-    #             "color": "#fc0303",
+    #             "name": "Apple",
+    #             "value": ["10", "15", "11"],
+    #             "color": ["#fc0303", "#3c32a8", "#32a87b"],
+    #             "field": ["April", "May", "June"]
     #         },
     #         {
-    #             "name": "tomata",
-    #             "value": "15",
-    #             "color": "#0367fc",
+    #             "name": "Orange",
+    #             "value": ["5", "12", "17"],
+    #             "color": ["#fc0303", "#3c32a8", "#32a87b"],
+    #             "field": ["April", "May", "June"]
     #         },
     #         {
-    #             "name": "idk",
-    #             "value": "17",
-    #             "color": "#03fc5e",
+    #             "name": "Banana",
+    #             "value": ["11", "10", "17"],
+    #             "color": ["#fc0303", "#3c32a8", "#32a87b"],
+    #             "field": ["April", "May", "June"]
     #         },
     #         {
-    #             "name": "hello",
-    #             "value": "7",
-    #             "color": "#b503fc",
-    #         }
+    #             "name": "Mango",
+    #             "value": ["5", "20", "17"],
+    #             "color": ["#fc0303", "#3c32a8", "#32a87b"],
+    #             "field": ["April", "May", "June"]
+    #         },
     #     ]
     # )
     # {
@@ -77,3 +81,9 @@ def home(request):
     data = map(lambda x: {"id": x["_id"],
                           "name": x["name"], "type": x["type"]}, plots)
     return render(request, 'main/home.html', {"plots": data})
+
+
+@login_required
+def plot(request, plotId):
+    plot = Plot.objects.get(_id=ObjectId(plotId))
+    return render(request, 'main/plot.html', {"plot": plot})

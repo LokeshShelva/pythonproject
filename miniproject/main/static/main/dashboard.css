@@ -111,3 +111,7 @@ main {
     overflow: hidden ;
     text-overflow: ellipsis ;
 }
+
+.card-container:hover{
+    transform: scale(1.05);
+}

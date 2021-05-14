@@ -50,9 +50,9 @@
             </div>
             <div class="grid-view">
                 {% for plot in plots %}
-                {% if plot.type == "B" %}
+                {% if plot.type == "B" or plot.type == "C" %}
                 <div class="card-container">
-                    <div id="{{ plot.id }}" class="card" onclick="console.log(event.currentTarget.id)">
+                    <div id="{{ plot.id }}" class="card" onclick="location.href = `plot/${event.currentTarget.id}`">
                         <div class="image-container">
                             <img src="{% static 'main/bar-graph.svg' %}">
                         </div>
@@ -60,7 +60,8 @@
                     </div>
                 </div>
                 {% elif plot.type == "P" %}
-                <div id="{{ plot.id }}" class="card-container">
+                <div id="{{ plot.id }}" class="card-container"
+                    onclick="location.href = `plot/${event.currentTarget.id}`">
                     <div class="card">
                         <div class="image-container">
                             <img src="{% static 'main/pie-chart.svg' %}">
@@ -69,7 +70,8 @@
                     </div>
                 </div>
                 {% elif plot.type == "L" %}
-                <div id="{{ plot.id }}" class="card-container">
+                <div id="{{ plot.id }}" class="card-container"
+                    onclick="location.href = `plot/${event.currentTarget.id}`">
                     <div class="card">
                         <div class="image-container">
                             <img src="{% static 'main/line-chart.svg' %}">
@@ -78,7 +80,8 @@
                     </div>
                 </div>
                 {% elif plot.type == "S" %}
-                <div id="{{ plot.id }}" class="card-container">
+                <div id="{{ plot.id }}" class="card-container"
+                    onclick="location.href = `plot/${event.currentTarget.id}`">
                     <div class="card">
                         <div class="image-container">
                             <img src="{% static 'main/chart.svg' %}">
