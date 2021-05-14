@@ -87,3 +87,8 @@ def home(request):
 def plot(request, plotId):
     plot = Plot.objects.get(_id=ObjectId(plotId))
     return render(request, 'main/plot.html', {"plot": plot})
+
+
+@login_required
+def create(request):
+    return render(request, 'main/createPlot.html')
