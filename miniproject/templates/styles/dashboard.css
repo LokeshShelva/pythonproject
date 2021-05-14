@@ -1,0 +1,113 @@
+
+.site-header {
+    width : 100% ;
+    height: 3.5rem ;
+    top: 0 ;
+    position: fixed ;
+    background-color: #fff ;
+    box-shadow: 0 0 6px var(--neutral-300);
+    z-index: 99 ;
+}
+
+.site-header .header-content {
+    width : 100% ;
+    height: 100% ;
+    display: flex ;
+    align-items: center ;
+}
+
+.site-header .header-content .header-title {
+    white-space: nowrap ;
+}
+
+.site-header .header-content .header-title h3 {
+    display: inline ;
+}
+
+.site-header .header-content .header-title span {
+    color: var(--secondary);
+}
+
+.site-header .header-content button.logout-btn {
+    padding: 0.5rem ;
+}
+
+main {
+    margin-top: 3.5rem ;
+}
+
+.section-header {
+    height: 4rem ;
+    display: flex ;
+    align-items: center ;
+}
+
+.section-header button {
+    flex:0;
+}
+
+.grid-view {
+    position: relative ;
+    display: grid ;
+    grid-template-columns: repeat(4,1fr);
+    gap: 1rem ;
+    padding-bottom: 5rem ;
+}
+
+.grid-view .card-container {
+    position: relative ;
+    padding-top: 100% ;
+    /* border: 1px solid magenta; */
+}
+
+@media screen and (max-width: 800px) {
+    .grid-view {
+        grid-template-columns: repeat(3,1fr) ;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .grid-view {
+        grid-template-columns: repeat(2,1fr) ;
+    }
+}
+
+
+.grid-view .card-container .card {
+    position: absolute ;
+    padding: 0.5rem ;
+    top: 0 ;
+    left: 0 ;
+    width: 100% ;
+    height: 100% ;
+    background-color: #fff ;
+    border-radius: 4px ;
+    box-shadow: 0 0 6px var(--neutral-300);
+    display: flex ;
+    flex-direction: column ;
+}
+
+.grid-view .card-container .card .image-container {
+    position: relative ;
+    flex: 1 ;
+    background-color: var(--neutral-100);
+    border-radius: 4px ;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow: hidden ;
+}
+
+.grid-view .card-container .card .image-container img {
+    height: 50% ;
+}
+
+.grid-view .card-container .card .graph-name {
+    flex: 0 0 2rem ;
+    line-height: 2rem ;
+    font-size: 0.9rem ;
+    margin-top: 0.5rem ;
+    color: var(--secondary);
+    overflow: hidden ;
+    text-overflow: ellipsis ;
+}

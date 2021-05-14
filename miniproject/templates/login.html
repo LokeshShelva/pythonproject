@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataViz | Login</title>
+    <!-- Load Styles -->
+    <link rel="stylesheet" href="./styles/common-style.css">
+    <link rel="stylesheet" href="./styles/login.css">
+</head>
+<body data-theme="light">
+    <div class="wrapper">
+        <h2 class="app-name">DataViz.py</h2>
+        <div class="form-container">
+            <div class="form-title">
+                <h3>Welcome</h3>
+            </div>
+            <form action="" onsubmit="return false">
+                <div class="form-fields">
+                    <div class="field">
+                        <div class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>ic_email_24px</title>
+                                <g>
+                                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path>
+                                </g>
+                            </svg>
+                        </div>
+                        <input id="username-textbox" name="username" type="text" placeholder="Username">
+                    </div>
+                    <div class="field">
+                        <div class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>ic_lock_24px</title>
+                                <g>
+                                    <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"></path>
+                                </g>
+                            </svg>
+                        </div>
+                        <input id="password-textbox" name="password" type="password" placeholder="Password">
+                        <div class="toogle-password-visibility" onclick="togglePasswordVisibility('#password-textbox')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>ic_remove_red_eye_24px</title>
+                                <g>
+                                    <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"></path>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <div class="row">
+                        <button class="btn hollow-btn">
+                            Sign up
+                        </button>
+                        <button class="btn filled-btn">
+                            Sign in
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Embeded Script -->
+    <script>
+        function togglePasswordVisibility(id){
+            let passwordTextbox = document.querySelector(id);
+            if(passwordTextbox.type == "text") {
+                passwordTextbox.type = "password";
+            } else {
+                passwordTextbox.type = "text";
+            }
+        }
+    </script>
+</body>
+</html>

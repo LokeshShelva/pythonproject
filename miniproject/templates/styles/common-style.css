@@ -1,0 +1,169 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+* {
+    padding:0;
+    margin :0;
+    box-sizing:border-box;
+    outline:none;
+}
+
+body {
+    font-family: "roboto",sans-serif;
+}
+
+body[data-theme="light"] {
+    --primary         :hsl(195, 100%, 47%);
+    --primary-light   :hsl(195, 100%, 50%);
+    --primary-dark    :hsl(195, 100%, 45%);
+
+    --secondary       :hsl(210, 32%, 37%);
+    --secondary-light :hsl(210, 32%, 56%);
+    --secondary-dark  :hsl(210, 32%, 20%);
+
+    --neutral-100     :hsl(208, 48%, 96%);
+    --neutral-300     :hsl(208, 48%, 86%);
+    --neutral-500     :hsl(208, 20%, 75%);
+    --neutral-700     :hsl(208, 20%, 60%);
+}
+
+.wrapper {
+    position: relative ;
+    min-height: 100vh ;
+    background-color: var(--neutral-100) ;
+}
+
+h1,h2,h3,h4,h5,h6,h7 {
+    color: var(--secondary);
+    font-family: "roboto",sans-serif;
+}
+
+input[type="text"] , input[type="password"] {
+    font-family: "roboto",sans-serif;
+    font-weight: 400 ;
+    font-size: 1rem ;
+    border-radius: 4px ;
+    border: 0 ;
+    background-color: var(--neutral-100) ;
+    border: 1px solid var(--neutral-300) ;
+    padding: 0.75rem 0.5rem ;
+    color: var(--secondary-light);
+}
+
+input[type="text"]::placeholder , input[type="password"]::placeholder {
+    color: var(--neutral-500) ;
+    font-weight: 400 ;
+}
+
+input[type="text"]:focus , input[type="password"]:focus {
+    border-color: transparent ;
+    color: var(--secondary);
+    box-shadow: 0 0 0 2px var(--primary);
+}
+
+button.btn {
+    flex: 1 ;
+    font-family: "roboto",sans-serif;
+    font-size: 0.75rem ;
+    font-weight: 700 ;
+    text-transform: uppercase ;
+    letter-spacing: 1px ;
+    border-radius: 4px ;
+    border: 2px solid ;
+    padding: 0.75rem 1rem ;
+    cursor: pointer ;
+}
+
+button.hollow-btn {
+    --svg-fill: var(--neutral-500);
+    background-color: transparent ;
+    color: var(--neutral-500) ;
+    border-color: var(--neutral-300);
+}
+
+button.hollow-btn:hover {
+    --svg-fill: var(--primary);
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+button.hollow-btn:active {
+    background-color: var(--neutral-100);
+}
+
+button.filled-btn {
+    --svg-fill: var(--neutral-100);
+    background-color: var(--primary) ;
+    color: var(--neutral-100) ;
+    border-color: var(--primary);
+}
+
+button.filled-btn:hover {
+    background-color: var(--primary-light);
+    border-color: var(--primary-light);
+}
+
+button.filled-btn:active {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+button.icon-btn {
+    display: flex ;
+    align-items: center ;
+}
+
+button.icon-btn svg {
+    display: inline-block ;
+    width : 24px ;
+    height: 24px ;
+    fill: var(--svg-fill);
+    margin-right: 0.8rem ;
+}
+
+button.borderless-btn {
+    --svg-fill: var(--neutral-700) ;
+    border: 0 ;
+    background-color: var(--neutral-300) ;
+    color: var(--neutral-700) ;
+    padding: 0.25rem ;
+    padding-right: 0.5rem ;
+}
+
+button.borderless-btn svg {
+    margin-right: 0.25rem ;
+}
+
+button.borderless-btn:hover {
+    background-color: var(--primary-light);
+    color: #fff ;
+    --svg-fill:#fff;
+}
+
+button.borderless-btn:active {
+    background-color: var(--primary-dark);
+}
+
+.content-wrapper {
+    position:relative;
+    width: 60% ;
+    height: 100% ;
+    margin: 0 auto ;
+}
+
+@media screen and (max-width: 800px) {
+    .content-wrapper {
+        width: 80% ;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .content-wrapper {
+        width: 100% ;
+        padding: 0 1rem ;
+    }
+}
+
+.gap {
+    flex: 1 ;
+}
