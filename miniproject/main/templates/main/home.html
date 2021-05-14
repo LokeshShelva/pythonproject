@@ -1,7 +1,97 @@
 {% extends "main/base.html" %}
+{% load static %}
 
-{% block title %} Home Page {% endblock title %}
+{% block title %} DataViz | Dashboard {% endblock title %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'main/dashboard.css' %}">
+{% endblock style %}
 
 {% block content %}
-<h1>Home page</h1>
+<div class="wrapper">
+    <header class="site-header">
+        <div class="content-wrapper">
+            <div class="header-content">
+                <div class="header-title">
+                    <h3 class="app-name">DataViz</h3>
+                    <span>| Dashboard</span>
+                </div>
+                <div class="gap"></div>
+                <div class="logout-btn">
+                    <button class="btn filled-btn icon-btn logout-btn" onclick="location.href='/auth/signout'">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <title>ic_exit_to_app_24px</title>
+                            <g>
+                                <path
+                                    d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z">
+                                </path>
+                            </g>
+                        </svg>
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="content-wrapper">
+            <div class="section-header">
+                <h4 class="section-title">Your Graphs</h4>
+                <div class="gap"></div>
+                <button class="btn borderless-btn icon-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <title>ic_add_24px</title>
+                        <g>
+                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
+                        </g>
+                    </svg>
+                    Create
+                </button>
+            </div>
+            <div class="grid-view">
+                {% for plot in plots %}
+                {% if plot.type == "B" %}
+                <div class="card-container">
+                    <div id="{{ plot.id }}" class="card" onclick="console.log(event.currentTarget.id)">
+                        <div class="image-container">
+                            <img src="{% static 'main/bar-graph.svg' %}">
+                        </div>
+                        <div class="graph-name">{{ plot.name }}</div>
+                    </div>
+                </div>
+                {% elif plot.type == "P" %}
+                <div id="{{ plot.id }}" class="card-container">
+                    <div class="card">
+                        <div class="image-container">
+                            <img src="{% static 'main/pie-chart.svg' %}">
+                        </div>
+                        <div class="graph-name">{{ plot.name }}</div>
+                    </div>
+                </div>
+                {% elif plot.type == "L" %}
+                <div id="{{ plot.id }}" class="card-container">
+                    <div class="card">
+                        <div class="image-container">
+                            <img src="{% static 'main/line-chart.svg' %}">
+                        </div>
+                        <div class="graph-name">{{ plot.name }}</div>
+                    </div>
+                </div>
+                {% elif plot.type == "S" %}
+                <div id="{{ plot.id }}" class="card-container">
+                    <div class="card">
+                        <div class="image-container">
+                            <img src="{% static 'main/chart.svg' %}">
+                        </div>
+                        <div class="graph-name">{{ plot.name }}</div>
+                    </div>
+                </div>
+                {% endif %}
+                {% empty %}
+                <p>No Plots... Create new plot</p>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+</div>
 {% endblock content %}
