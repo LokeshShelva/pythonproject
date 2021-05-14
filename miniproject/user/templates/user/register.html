@@ -1,13 +1,25 @@
 {% extends "main/base.html" %}
 {% block title %} Register {% endblock title %}
-
+{% load widget_tweaks%}
 {% block content %}
 <div class="main">
     <form method="POST">
         {% csrf_token %}
-        <fieldset class="form-group">
-            {{ form }}
-        </fieldset>
+        <div class="form-group">
+            <div>
+                {% render_field form.username class+="username" placeholder+="Username" %}
+                {{ form.username.errors }}
+                {% render_field form.email class+="email" placeholder+="Email" %}
+                {{ form.email.errors }}
+                {% render_field form.password1 class+="passwrod" placeholder+="Password" %}
+                {{ form.password1.errors }}
+                {% render_field form.password2 class+="password-confirm" placeholder+="Confiirm Password" %}
+                {{ form.password2.errors }}
+            </div>
+        </div>
+        <div class="button-container">
+            <button type="submit">Sign Up</button>
+        </div>
     </form>
 </div>
 {% endblock content %}
