@@ -6,49 +6,6 @@ from bson.objectid import ObjectId
 
 @login_required
 def home(request):
-    # p = Plot.objects.create(
-    #     user=request.user,
-    #     type="C",
-    #     name="Compound Bar graph 1",
-    #     yAxis={
-    #         "name": "weight",
-    #         "unit": "kg",
-    #         "minRange": "0",
-    #         "maxRange": "25",
-    #     },
-    #     xAxis={
-    #         "name": "fruits",
-    #         "unit": "",
-    #         "minRange": "5",
-    #         "maxRange": "25",
-    #     },
-    #     data=[
-    #         {
-    #             "name": "Apple",
-    #             "value": ["10", "15", "11"],
-    #             "color": ["#fc0303", "#3c32a8", "#32a87b"],
-    #             "field": ["April", "May", "June"]
-    #         },
-    #         {
-    #             "name": "Orange",
-    #             "value": ["5", "12", "17"],
-    #             "color": ["#fc0303", "#3c32a8", "#32a87b"],
-    #             "field": ["April", "May", "June"]
-    #         },
-    #         {
-    #             "name": "Banana",
-    #             "value": ["11", "10", "17"],
-    #             "color": ["#fc0303", "#3c32a8", "#32a87b"],
-    #             "field": ["April", "May", "June"]
-    #         },
-    #         {
-    #             "name": "Mango",
-    #             "value": ["5", "20", "17"],
-    #             "color": ["#fc0303", "#3c32a8", "#32a87b"],
-    #             "field": ["April", "May", "June"]
-    #         },
-    #     ]
-    # )
     # {
     #     "type": "B",
     #     "name": "Graph",
@@ -77,9 +34,10 @@ def home(request):
     #         }
     #     ]
     # }
-    plots = Plot.objects.filter(user=request.user).values()
-    data = map(lambda x: {"id": x["_id"],
-                          "name": x["name"], "type": x["type"]}, plots)
+    plots = Plot.objects.filter(
+        user=request.user).values_list('_id', "name", "type")
+    data = map(lambda x: {"id": x[0],
+               "name": x[1], "type": x[2]}, plots)
     return render(request, 'main/home.html', {"plots": data})
 
 
@@ -91,4 +49,11 @@ def plot(request, plotId):
 
 @login_required
 def create(request):
-    return render(request, 'main/createPlot.html')
+    graphType = request.GET.get('graph-type')
+    graphId = request.GET.get('id', "")
+    print(graphType, graphId)
+    context = {
+        "graphType": graphType,
+        "graphId": graphId,
+    }
+    return render(request, 'main/createPlot.html', context)

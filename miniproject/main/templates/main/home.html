@@ -38,21 +38,29 @@
             <div class="section-header">
                 <h4 class="section-title">Your Graphs</h4>
                 <div class="gap"></div>
-                <button class="btn borderless-btn icon-btn" onclick="location.href = '/create'">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <title>ic_add_24px</title>
-                        <g>
-                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
-                        </g>
-                    </svg>
-                    Create
-                </button>
+                <div class="dropdown">
+                    <button class="btn borderless-btn icon-btn" id="dropdown-btn" onclick="create()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <title>ic_add_24px</title>
+                            <g>
+                                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
+                            </g>
+                        </svg>
+                        Create
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="/create?graph-type=bargraph">Bar Graph</a>
+                        <a href="/create?graph-type=linegraph">Line Graph</a>
+                        <a href="/create?graph-type=piechart">Pie Chart</a>
+                    </div>
+                </div>
             </div>
             <div class="grid-view">
                 {% for plot in plots %}
                 {% if plot.type == "B" or plot.type == "C" %}
                 <div class="card-container">
-                    <div id="{{ plot.id }}" class="card" onclick="location.href = `plot/${event.currentTarget.id}`">
+                    <div id="{{ plot.id }}" class="card"
+                        onclick="location.href = `/create?graph-type=bargraph&id=${event.currentTarget.id}`">
                         <div class="image-container">
                             <img src="{% static 'main/bar-graph.svg' %}">
                         </div>
@@ -97,4 +105,22 @@
         </div>
     </main>
 </div>
+<script>
+    function create() {
+        document.querySelector(".dropdown-content").classList.toggle("show")
+    }
+
+    window.onclick = function (event) {
+        if (!event.target.matches('#dropdown-btn')) {
+            let dropdowns = document.getElementsByClassName("dropdown-content");
+            let i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>
 {% endblock content %}
