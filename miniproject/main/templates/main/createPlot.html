@@ -8,6 +8,6 @@
 
 {% block content %}
 <div class="wrapper">
-    <h1>{{ graphType }} {{ graphId }} {{edit}}</h1>
+    {{ plot | safe }}
 </div>
 {% endblock content %}

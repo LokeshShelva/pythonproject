@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import Plot
 from bson.objectid import ObjectId
+from .plotter import plotter
 
 
 @login_required
@@ -52,10 +53,12 @@ def create(request):
     graphType = request.GET.get('graph-type')
     graphId = request.GET.get('id', "")
     isedit = request.GET.get('edit', "false")
-    print(graphType, graphId)
+    plot = Plot.objects.filter(_id=ObjectId(graphId)).values()
+    div = plotter(plot[0])
     context = {
         "graphType": graphType,
         "graphId": graphId,
         "edit": isedit,
+        "plot": div,
     }
     return render(request, 'main/createPlot.html', context)
