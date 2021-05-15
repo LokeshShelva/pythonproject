@@ -51,9 +51,11 @@ def plot(request, plotId):
 def create(request):
     graphType = request.GET.get('graph-type')
     graphId = request.GET.get('id', "")
+    isedit = request.GET.get('edit', "false")
     print(graphType, graphId)
     context = {
         "graphType": graphType,
         "graphId": graphId,
+        "edit": isedit,
     }
     return render(request, 'main/createPlot.html', context)

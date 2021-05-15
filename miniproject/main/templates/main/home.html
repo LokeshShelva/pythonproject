@@ -69,7 +69,7 @@
                 </div>
                 {% elif plot.type == "P" %}
                 <div id="{{ plot.id }}" class="card-container"
-                    onclick="location.href = `plot/${event.currentTarget.id}`">
+                    onclick="location.href = `/create?graph-type=piechart&id=${event.currentTarget.id}`">
                     <div class="card">
                         <div class="image-container">
                             <img src="{% static 'main/pie-chart.svg' %}">
@@ -79,7 +79,7 @@
                 </div>
                 {% elif plot.type == "L" %}
                 <div id="{{ plot.id }}" class="card-container"
-                    onclick="location.href = `plot/${event.currentTarget.id}`">
+                    onclick="location.href = `/create?graph-type=linegraph&id=${event.currentTarget.id}`">
                     <div class="card">
                         <div class="image-container">
                             <img src="{% static 'main/line-chart.svg' %}">
@@ -89,7 +89,7 @@
                 </div>
                 {% elif plot.type == "S" %}
                 <div id="{{ plot.id }}" class="card-container"
-                    onclick="location.href = `plot/${event.currentTarget.id}`">
+                    onclick="location.href = `/create?graph-type=scatterplot&id=${event.currentTarget.id}`">
                     <div class="card">
                         <div class="image-container">
                             <img src="{% static 'main/chart.svg' %}">
