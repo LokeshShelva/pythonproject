@@ -26,8 +26,9 @@ class AxisForm(forms.ModelForm):
 
 class Data(models.Model):
     name = models.CharField(max_length=50)
-    color = models.CharField(max_length=10)
-    value = models.CharField(max_length=20)
+    color = models.CharField(max_length=100)
+    value = models.CharField(max_length=100)
+    field = models.CharField(max_length=100)
 
     class Meta:
         abstract = True

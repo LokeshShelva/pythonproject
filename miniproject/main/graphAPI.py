@@ -28,14 +28,14 @@ def Grouped_Bar_API(graph_data):
     df = pd.DataFrame()
     dataSet = graph_data['data']
     df['label'] = []
-    color = dataSet[0]['color']
+    color = ast.literal_eval(dataSet[0]['color'])
     graph_data['yAxis']['minRange'], graph_data['yAxis']['maxRange'] = float(
         graph_data['yAxis']['minRange']), float(graph_data['yAxis']['maxRange'])
 
-    for f in dataSet[0]['field']:
+    for f in ast.literal_eval(dataSet[0]['field']):
         df[f] = []
     for entry in dataSet:
-        row_val = [entry['name']]+[int(x)
+        row_val = [entry['name']]+[float(x)
                                    for x in ast.literal_eval(entry['value'])]
         new_row = {k: v for k, v in zip(df.columns, row_val)}
         df = df.append(new_row, ignore_index=True)
