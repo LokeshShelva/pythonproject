@@ -25,6 +25,8 @@ body[data-theme="light"] {
     --neutral-300     :hsl(208, 48%, 86%);
     --neutral-500     :hsl(208, 20%, 75%);
     --neutral-700     :hsl(208, 20%, 60%);
+
+    --red: hsl(348, 93%, 58%);
 }
 
 .wrapper {
@@ -38,7 +40,7 @@ h1,h2,h3,h4,h5,h6,h7 {
     font-family: "roboto",sans-serif;
 }
 
-input[type="text"] , input[type="password"] {
+input[type="text"] , input[type="password"] , input[type="email"] {
     font-family: "roboto",sans-serif;
     font-weight: 400 ;
     font-size: 1rem ;
@@ -50,12 +52,12 @@ input[type="text"] , input[type="password"] {
     color: var(--secondary-light);
 }
 
-input[type="text"]::placeholder , input[type="password"]::placeholder {
+input[type="text"]::placeholder , input[type="password"]::placeholder , input[type="email"]::placeholder {
     color: var(--neutral-500) ;
     font-weight: 400 ;
 }
 
-input[type="text"]:focus , input[type="password"]:focus {
+input[type="text"]:focus , input[type="password"]:focus , input[type="email"]:focus {
     border-color: transparent ;
     color: var(--secondary);
     box-shadow: 0 0 0 2px var(--primary);

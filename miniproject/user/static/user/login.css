@@ -31,7 +31,7 @@
     position: relative ;
 }
 
-.form-container .form-fields .field + .field {
+.form-container .form-fields * + .field {
     margin-top: 1rem ;
 }
 
@@ -89,4 +89,14 @@
 
 .form-container input[type="text"] + .toogle-password-visibility svg {
     fill: var(--primary);
+}
+
+.form-container .form-fields .error-list-container {
+    margin-top: 0.25rem ;
+}
+
+.form-container .form-fields .error-list-container ul {
+    list-style: none ;
+    color: var(--red);
+    font-size: 0.75rem ;
 }
