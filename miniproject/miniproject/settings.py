@@ -81,7 +81,7 @@ DATABASES = {
         'ENGINE': 'djongo',
         'CLIENT': {
             'name': 'myFirstDatabase',
-            'host': 'mongodb+srv://Lokesh:iaLSailIM<@cluster0.j5abg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+            'host': 'mongodb+srv://Lokesh:iaLSailIM<@cluster0.j5abg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority&ssl=true&ssl_cert_reqs=CERT_NONE',
             'username': 'Lokesh',
             'password': 'iaLSailIM'
         }    # mongodb+srv://Lokesh:<password>@cluster0.j5abg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
