@@ -231,8 +231,10 @@
                     <script src="{% static 'main/scripts/single-data-editor.js' %}"></script>
                     {% elif graphType == "linegraph" %}
                     <point-data-editor id="data-editor"></-data-editor>
+                    <script src="{% static 'main/scripts/point-data-editor.js' %}"></script>
                     {% elif graphType == "scatterplot" %}
                     <point-data-editor id="data-editor"></point-data-editor>
+                    <script src="{% static 'main/scripts/point-data-editor.js' %}"></script>
                     {% endif %}
                 </div>
             </div>
