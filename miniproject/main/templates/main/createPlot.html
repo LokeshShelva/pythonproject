@@ -29,6 +29,29 @@
                 {% endif %}
             </div>
             <div class="gap"></div>
+            {% if edit == "false" and graphId != "" %}
+            <div class="action-btns">
+                <button class="btn hollow-btn icon-btn logout-btn" onclick="location.href = `{% url 'home' %}`">
+                    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <g class="nc-icon-wrapper">
+                            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z">
+                            </path>
+                        </g>
+                    </svg>
+                    Go Back
+                </button>
+                <button class="btn filled-btn icon-btn logout-btn" type="submit"
+                    onclick="location.href = `{% url 'create' %}?graph-type={{ graphType }}&id={{ graphId }}&edit=true`">
+                    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <g class="nc-icon-wrapper">
+                            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z">
+                            </path>
+                        </g>
+                    </svg>
+                    Edit
+                </button>
+            </div>
+            {% else %}
             <div class="action-btns">
                 <button class="btn hollow-btn icon-btn logout-btn" onclick="location.href = `{% url 'home' %}`">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -42,7 +65,6 @@
                     Cancel
                 </button>
                 <button class="btn filled-btn icon-btn logout-btn" type="submit" form="graph-form">
-                    <!--  onclick="window.location.href = `?graph-type={{ graphTpye }}&id={{ graphId }}&edit=true`" -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <title>ic_save_24px</title>
                         <g>
@@ -54,6 +76,7 @@
                     Save
                 </button>
             </div>
+            {% endif %}
         </div>
     </div>
 </header>
@@ -67,130 +90,140 @@
         {% endif %}
         {% if edit == "true" %}
         <!-- change edit value after development -->
+        {% if graphId != "" %}
         <form method="POST" id="graph-form" action="?graph-type={{ graphType }}&id={{ graphId }}&edit=true">
-            {% csrf_token %}
-            <div class="block">
-                <div class="block-header">
-                    <div class="block-title">Graph Details</div>
-                </div>
-                <div class="block-body">
-                    <div class="row-field">
-                        <label for="graph-title">Graph Title</label>
-                        {% if graphId == "" %}
-                        <input id="graph-title" type="text" placeholder="Enter graph title" name="graphTitle">
-                        {% else %}
-                        <input id="graph-title" type="text" placeholder="Enter graph title" name="graphTitle"
-                            value="{{ graphData.name }}">
-                        {% endif %}
-                    </div>
-                    <div class="row-field">
-                        <label for="graph-description">Graph Description</label>
-                        <textarea id="graph-description" placeholder="Enter description about graph"
-                            name="graphDescription"></textarea>
-                    </div>
-                </div>
-            </div>
-            {% if graphType != "piechart" %}
-            <div class="block-row">
+            {% else %}
+            <form method="POST" id="graph-form" action="{% url 'add' %}">
+                {% endif %}
+                {% csrf_token %}
                 <div class="block">
                     <div class="block-header">
-                        <div class="block-title">X Axis</div>
+                        <div class="block-title">Graph Details</div>
                     </div>
                     <div class="block-body">
                         <div class="row-field">
-                            <label for="x-axis-name">Name</label>
+                            <label for="graph-title">Graph Title</label>
                             {% if graphId == "" %}
-                            <input id="x-axis-name" type="text" placeholder="Enter axis name" name="xAxisName">
+                            <input id="graph-title" type="text" placeholder="Enter graph title" name="graphTitle">
                             {% else %}
-                            <input id="x-axis-name" type="text" placeholder="Enter axis name" name="xAxisName"
-                                value="{{ graphData.xAxis.name }}">
+                            <input id="graph-title" type="text" placeholder="Enter graph title" name="graphTitle"
+                                value="{{ graphData.name }}">
                             {% endif %}
                         </div>
                         <div class="row-field">
-                            <label for="x-axis-unit">Unit</label>
+                            <label for="graph-description">Graph Description</label>
                             {% if graphId == "" %}
-                            <input id="x-axis-unit" type="text" placeholder="Enter axis unit" name="xAxisUnit">
+                            <textarea id="graph-description" placeholder="Enter description about graph"
+                                name="graphDescription"></textarea>
                             {% else %}
-                            <input id="x-axis-unit" type="text" placeholder="Enter axis unit" name="xAxisUnit"
-                                value="{{ graphData.xAxis.unit }}">
+                            <textarea id="graph-description" placeholder="Enter description about graph"
+                                name="graphDescription">{% if graphData.description %}{{ graphData.description }}{% endif %}</textarea>
                             {% endif %}
                         </div>
-                        <div class="row-field">
-                            <label>Range</label>
-                            <div class="min-max-row">
+                    </div>
+                </div>
+                {% if graphType != "piechart" %}
+                <div class="block-row">
+                    <div class="block">
+                        <div class="block-header">
+                            <div class="block-title">X Axis</div>
+                        </div>
+                        <div class="block-body">
+                            <div class="row-field">
+                                <label for="x-axis-name">Name</label>
                                 {% if graphId == "" %}
-                                <input id="x-axis-min" type="text" placeholder="Min" name="xAxisMinRange">
+                                <input id="x-axis-name" type="text" placeholder="Enter axis name" name="xAxisName">
                                 {% else %}
-                                <input id="x-axis-min" type="text" placeholder="Min" name="xAxisMinRange"
-                                    value="{{ graphData.xAxis.minRange }}">
+                                <input id="x-axis-name" type="text" placeholder="Enter axis name" name="xAxisName"
+                                    value="{{ graphData.xAxis.name }}">
                                 {% endif %}
-                                <span>to</span>
+                            </div>
+                            <div class="row-field">
+                                <label for="x-axis-unit">Unit</label>
                                 {% if graphId == "" %}
-                                <input id="x-axis-max" type="text" placeholder="Max" name="xAxisMaxRange">
+                                <input id="x-axis-unit" type="text" placeholder="Enter axis unit" name="xAxisUnit">
                                 {% else %}
-                                <input id="x-axis-max" type="text" placeholder="Max" name="xAxisMaxRange"
-                                    value="{{ graphData.xAxis.maxRange }}">
+                                <input id="x-axis-unit" type="text" placeholder="Enter axis unit" name="xAxisUnit"
+                                    value="{{ graphData.xAxis.unit }}">
                                 {% endif %}
+                            </div>
+                            <div class="row-field">
+                                <label>Range</label>
+                                <div class="min-max-row">
+                                    {% if graphId == "" %}
+                                    <input id="x-axis-min" type="text" placeholder="Min" name="xAxisMinRange">
+                                    {% else %}
+                                    <input id="x-axis-min" type="text" placeholder="Min" name="xAxisMinRange"
+                                        value="{{ graphData.xAxis.minRange }}">
+                                    {% endif %}
+                                    <span>to</span>
+                                    {% if graphId == "" %}
+                                    <input id="x-axis-max" type="text" placeholder="Max" name="xAxisMaxRange">
+                                    {% else %}
+                                    <input id="x-axis-max" type="text" placeholder="Max" name="xAxisMaxRange"
+                                        value="{{ graphData.xAxis.maxRange }}">
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="block">
+                        <div class="block-header">
+                            <div class="block-title">Y Axis</div>
+                        </div>
+                        <div class="block-body">
+                            <div class="row-field">
+                                <label for="y-axis-name">Name</label>
+                                {% if graphId == "" %}
+                                <input id="y-axis-name" type="text" placeholder="Enter axis name" name="yAxisName">
+                                {% else %}
+                                <input id="y-axis-name" type="text" placeholder="Enter axis name" name="yAxisName"
+                                    value="{{ graphData.yAxis.name }}">
+                                {% endif %}
+                            </div>
+                            <div class="row-field">
+                                <label for="y-axis-unit">Unit</label>
+                                {% if graphId == "" %}
+                                <input id="y-axis-unit" type="text" placeholder="Enter axis unit" name="yAxisUnit">
+                                {% else %}
+                                <input id="y-axis-unit" type="text" placeholder="Enter axis unit" name="yAxisUnit"
+                                    value="{{ graphData.yAxis.unit }}">
+                                {% endif %}
+                            </div>
+                            <div class="row-field">
+                                <label>Range</label>
+                                <div class="min-max-row">
+                                    {% if graphId == "" %}
+                                    <input id="y-axis-min" type="text" placeholder="Min" name="yAxisMinRange">
+                                    {% else %}
+                                    <input id="y-axis-min" type="text" placeholder="Min" name="yAxisMinRange"
+                                        value="{{ graphData.yAxis.minRange }}">
+                                    {% endif %}
+                                    <span>to</span>
+                                    {% if graphId == "" %}
+                                    <input id="y-axis-max" type="text" placeholder="Max" name="yAxisMaxRange">
+                                    {% else %}
+                                    <input id="y-axis-max" type="text" placeholder="Max" name="yAxisMaxRange"
+                                        value="{{ graphData.yAxis.maxRange }}">
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                {% endif %}
 
                 <div class="block">
                     <div class="block-header">
-                        <div class="block-title">Y Axis</div>
+                        <div class="block-title">Graph Data</div>
                     </div>
                     <div class="block-body">
-                        <div class="row-field">
-                            <label for="y-axis-name">Name</label>
-                            {% if graphId == "" %}
-                            <input id="y-axis-name" type="text" placeholder="Enter axis name" name="yAxisName">
-                            {% else %}
-                            <input id="y-axis-name" type="text" placeholder="Enter axis name" name="yAxisName"
-                                value="{{ graphData.yAxis.name }}">
-                            {% endif %}
-                        </div>
-                        <div class="row-field">
-                            <label for="y-axis-unit">Unit</label>
-                            {% if graphId == "" %}
-                            <input id="y-axis-unit" type="text" placeholder="Enter axis unit" name="yAxisUnit">
-                            {% else %}
-                            <input id="y-axis-unit" type="text" placeholder="Enter axis unit" name="yAxisUnit"
-                                value="{{ graphData.yAxis.unit }}">
-                            {% endif %}
-                        </div>
-                        <div class="row-field">
-                            <label>Range</label>
-                            <div class="min-max-row">
-                                {% if graphId == "" %}
-                                <input id="y-axis-min" type="text" placeholder="Min" name="yAxisMinRange">
-                                {% else %}
-                                <input id="y-axis-min" type="text" placeholder="Min" name="yAxisMinRange"
-                                    value="{{ graphData.yAxis.minRange }}">
-                                {% endif %}
-                                <span>to</span>
-                                {% if graphId == "" %}
-                                <input id="y-axis-max" type="text" placeholder="Max" name="yAxisMaxRange">
-                                {% else %}
-                                <input id="y-axis-max" type="text" placeholder="Max" name="yAxisMaxRange"
-                                    value="{{ graphData.yAxis.maxRange }}">
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endif %}
-
-            <div class="block">
-                <div class="block-header">
-                    <div class="block-title">Graph Data</div>
-                </div>
-                <div class="block-body">
-                    <!-- 
+                        <!-- 
                     Custom Elements for making graph 
                     Add if conditions here for each element according to the graph type
                 -->
+<<<<<<< HEAD
                     {% if graphType == "bargraph" %}
                     <compound-data-editor id="data-editor"></compound-data-editor>
                     <script src="{% static 'main/scripts/compound-data-editor.js' %}"></script>
@@ -214,6 +247,21 @@
             }
         </script>
         {% endif %}
+=======
+                        {% if graphType == "bargraph" %}
+                        <bargraph-data-editor></bargraph-data-editor>
+                        {% elif graphType == "piechart" %}
+                        <piechart-data-editor></piechart-data-editor>
+                        {% elif graphType == "linegraph" %}
+                        <linegraph-data-editor></linegraph-data-editor>
+                        {% elif graphType == "scatterplot" %}
+                        <scatterplot-data-editor></scatterplot-data-editor>
+                        {% endif %}
+                    </div>
+                </div>
+            </form>
+            {% endif %}
+>>>>>>> 1495c26829a584ed765e368220dbb20eae3fed50
     </div>
 </main>
 {% endblock content %}

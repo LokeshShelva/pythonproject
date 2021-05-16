@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from .models import Plot
 from bson.objectid import ObjectId
@@ -73,12 +73,6 @@ def home(request):
 
 
 @login_required
-def plot(request, plotId):
-    plot = Plot.objects.get(_id=ObjectId(plotId))
-    return render(request, 'main/plot.html', {"plot": plot})
-
-
-@login_required
 def create(request):
     graphType = request.GET.get('graph-type')
     graphId = request.GET.get('id', "")
@@ -92,7 +86,9 @@ def create(request):
         plot = [""]
 
     if request.method == "POST":
-        print(data_API(request.POST))
+        update_data = data_API(request.POST)
+        Plot.objects.filter(_id=ObjectId(graphId)).update(**update_data)
+        return redirect(reverse('create') + f"?graph-type={graphType}&id={graphId}&edit=true")
 
     if plot[0]:
         jsonData = dumps(plot[0]['data'])
@@ -108,3 +104,15 @@ def create(request):
         "data": jsonData,
     }
     return render(request, 'main/createPlot.html', context)
+
+
+def delete(request):
+    Id = request.GET.get('id')
+    res = Plot.objects.get(_id=ObjectId(Id)).delete()
+    return redirect('home')
+
+
+def add(request):
+    data = data_API(request.POST, request.user)
+    uploaded = Plot.objects.create(**data)
+    return redirect('home')
