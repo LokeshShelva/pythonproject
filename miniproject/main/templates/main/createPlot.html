@@ -254,7 +254,12 @@
                     let formEl = document.getElementById('graph-form');
                     let formData = new FormData(formEl);
                     let req = new XMLHttpRequest();
-                    req.open("POST", '/add/?type={{graphType|escapejs}}')
+                    if ("{{ graphId|escapejs }}" == "") {
+                        req.open("POST", '/add/?type={{graphType|escapejs}}')
+                    } else {
+                        req.open("POST", '/create/?graph-type={{graphType|escapejs}}&id={{graphId|escapejs}}&edit=true')
+                    }
+
                     formData.append('data', JSON.stringify(editor.getData()))
                     if ("{{graphType|escapejs}}" == "piechart") {
                         addData()
@@ -262,7 +267,11 @@
                     req.send(formData)
                     req.onreadystatechange = function () {
                         if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                            window.location.replace("/")
+                            if ("{{graphId|escapejs}}" == "") {
+                                window.location.replace("/")
+                            } else {
+                                window.location.replace('/create/?graph-type={{graphType|escapejs}}&id={{graphId|escapejs}}&edit=true')
+                            }
                         }
                     }
                     function addData() {

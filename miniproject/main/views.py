@@ -86,7 +86,7 @@ def create(request):
         plot = [""]
 
     if request.method == "POST":
-        update_data = data_API(request.POST)
+        update_data = data_API(request.POST, None)
         Plot.objects.filter(_id=ObjectId(graphId)).update(**update_data)
         return redirect(reverse('create') + f"?graph-type={graphType}&id={graphId}&edit=true")
 
@@ -118,7 +118,7 @@ def add(request):
     ref_dict = {
         "bargraph": "B",
         "linegraph": "L",
-        "compountbargraph": "C",
+        "compoundbargraph": "C",
         "scatterplot": "S",
         "piechart": "P"
     }
