@@ -5,12 +5,20 @@ main {
     padding-bottom: 4rem ;
 }
 
-.block {
+.block, .graph-wrapper{
     background-color: #fff ;
     width: 100% ;
     flex: 1 ;
     border-radius: 8px ;
     box-shadow: 0 0 6px var(--neutral-300);
+}
+
+.block{
+    margin-top: 1rem;
+}
+
+.graph-wrapper{
+    padding: 1rem;
 }
 
 .block + .block , .block + .block-row ,  .block-row + .block {

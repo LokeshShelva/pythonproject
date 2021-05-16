@@ -49,8 +49,8 @@ def Grouped_Bar_API(graph_data):
 def Scatter_API(graph_data):
     ds = graph_data['data']
     for entry in ds:
-        x = [int(i[0]) for i in ast.literal_eval(entry['value'])]
-        y = [int(i[1]) for i in ast.literal_eval(entry['value'])]
+        x = [float(i[0]) for i in ast.literal_eval(entry['value'])]
+        y = [float(i[1]) for i in ast.literal_eval(entry['value'])]
         new = {'x': x, 'y': y}
         entry.update(new)
     dictionary = {
@@ -62,8 +62,8 @@ def Scatter_API(graph_data):
 def Line_API(graph_data):
     df = graph_data['data']
     for entry in df:
-        x = [int(i[0]) for i in ast.literal_eval(entry['value'])]
-        y = [int(i[1]) for i in ast.literal_eval(entry['value'])]
+        x = [float(i[0]) for i in ast.literal_eval(entry['value'])]
+        y = [float(i[1]) for i in ast.literal_eval(entry['value'])]
         new = {'x': x, 'y': y}
         entry.update(new)
     dictionary = {
@@ -79,7 +79,7 @@ def Pie_API(graph_data):
     for entry in dataSet:
         name.append(entry['name'])
         color.append(entry['color'])
-        value.append(int(entry['value']))
+        value.append(float(entry['value']))
     df['data'] = value
     df['label'] = name
     df['color'] = color

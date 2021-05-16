@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Plot
 from bson.objectid import ObjectId
 from .plotter import plotter
-import random
+from .dataAPI import data_API
 
 
 @login_required
@@ -82,15 +82,22 @@ def create(request):
     graphType = request.GET.get('graph-type')
     graphId = request.GET.get('id', "")
     isedit = request.GET.get('edit', "false")
+
     if graphId != "":
         plot = Plot.objects.filter(_id=ObjectId(graphId)).values()
         div = plotter(plot[0])
     else:
-        div = "<h1>Hi</h1>"
+        div = None
+        plot = [""]
+
+    if request.method == "POST":
+        print(data_API(request.POST))
+
     context = {
         "graphType": graphType,
         "graphId": graphId,
         "edit": isedit,
         "plot": div,
+        "graphData": plot[0],
     }
     return render(request, 'main/createPlot.html', context)
