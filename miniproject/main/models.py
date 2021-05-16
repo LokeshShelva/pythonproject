@@ -6,10 +6,10 @@ from django.contrib.auth.models import User
 
 
 class Axis(models.Model):
-    name = models.CharField(max_length=50)
-    unit = models.CharField(max_length=50)
-    minRange = models.CharField(max_length=20)
-    maxRange = models.CharField(max_length=20)
+    name = models.CharField(max_length=50, default="Axis")
+    unit = models.CharField(max_length=50, default="")
+    minRange = models.CharField(max_length=20, default="")
+    maxRange = models.CharField(max_length=20, default="")
 
     class Meta:
         abstract = True
@@ -25,10 +25,10 @@ class AxisForm(forms.ModelForm):
 
 
 class Data(models.Model):
-    name = models.CharField(max_length=50)
-    color = models.CharField(max_length=100)
-    value = models.CharField(max_length=100)
-    field = models.CharField(max_length=100)
+    name = models.CharField(max_length=50, default="")
+    color = models.CharField(max_length=100, default="")
+    value = models.CharField(max_length=1000, default="")
+    field = models.CharField(max_length=100, default="")
 
     class Meta:
         abstract = True

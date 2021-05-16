@@ -3,10 +3,39 @@ from django.contrib.auth.decorators import login_required
 from .models import Plot
 from bson.objectid import ObjectId
 from .plotter import plotter
+import random
 
 
 @login_required
 def home(request):
+    # list1 = []
+    # list2 = []
+
+    # for i in range(50):
+    #     list1.append([str(random.randint(5, 100)),
+    #                  str(random.randint(500, 5000))])
+    #     list2.append([str(random.randint(5, 100)),
+    #                  str(random.randint(500, 5000))])
+
+    # Plot.objects.create(
+    #     user=request.user,
+    #     type="S",
+    #     name="Scatter plot",
+    #     xAxis={
+    #         "name": "X axis",
+    #         "unit": "cm",
+    #         "minRange": "0",
+    #         "maxRange": "125",
+    #     },
+    #     yAxis={
+    #         "name": "Y axis",
+    #         "unit": "plot",
+    #         "minRange": "100",
+    #         "maxRange": "6000",
+    #     },
+    #     data=[
+    #     ]
+    # )
     # {
     #     "type": "B",
     #     "name": "Graph",
@@ -53,8 +82,11 @@ def create(request):
     graphType = request.GET.get('graph-type')
     graphId = request.GET.get('id', "")
     isedit = request.GET.get('edit', "false")
-    plot = Plot.objects.filter(_id=ObjectId(graphId)).values()
-    div = plotter(plot[0])
+    if graphId != "":
+        plot = Plot.objects.filter(_id=ObjectId(graphId)).values()
+        div = plotter(plot[0])
+    else:
+        div = "<h1>Hi</h1>"
     context = {
         "graphType": graphType,
         "graphId": graphId,
