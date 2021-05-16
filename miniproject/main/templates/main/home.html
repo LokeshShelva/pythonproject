@@ -69,7 +69,7 @@
             </div>
             <div class="grid-view">
                 {% for plot in plots %}
-                {% if plot.type == "B" or plot.type == "C" %}
+                {% if plot.type == "B" %}
                 <div class="card-container">
                     <div class="card" onclick='location.href = "/create?graph-type=bargraph&id={{ plot.id }}"'>
                         <div class="image-container">
@@ -122,8 +122,61 @@
                         </div>
                     </div>
                 </div>
+                {% elif plot.type == "C" %}
+                <div class="card-container">
+                    <div class="card" onclick='location.href = "/create?graph-type=compoundbargraphid={{ plot.id }}"'>
+                        <div class="image-container">
+                            <img src="{% static 'main/bar-graph.svg' %}">
+                        </div>
+                        <div class="name-container">
+                            <div class="graph-name">
+                                {{ plot.name }}
+                            </div>
+                            <div class="dropdown-icon">
+                                <button class=" dropdown-btn" onclick='showOption(event, "{{plot.id}}")'>
+                                    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <g class="nc-icon-wrapper">
+                                            <path
+                                                d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+                                                fill="#212121"></path>
+                                        </g>
+                                    </svg>
+                                </button>
+                                <div class="dropdown-options" id="option-{{ plot.id }}">
+                                    <div class="dropdown-option">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14"
+                                            viewBox="0 0 12 12">
+                                            <g class="nc-icon-wrapper">
+                                                <path
+                                                    d="M11.707,1.879,10.121.293a1,1,0,0,0-1.414,0L7.354,1.646l3,3,1.353-1.353A1,1,0,0,0,11.707,1.879Z"
+                                                    data-color="color-2"></path>
+                                                <polygon points="6.646 2.354 1 8 0 12 4 11 9.646 5.354 6.646 2.354">
+                                                </polygon>
+                                            </g>
+                                        </svg>
+                                        <a href="create?graph-type=bargraph&id={{ plot.id }}&edit=true">Edit</a>
+                                    </div>
+                                    <div class="dropdown-option">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14"
+                                            viewBox="0 0 64 64">
+                                            <g class="nc-icon-wrapper">
+                                                <path data-color="color-2"
+                                                    d="M60,12H43V6a4,4,0,0,0-4-4H25a4,4,0,0,0-4,4v6H4a1,1,0,0,0,0,2H60a1,1,0,0,0,0-2ZM23,6a2,2,0,0,1,2-2H39a2,2,0,0,1,2,2v6H23Z">
+                                                </path>
+                                                <path
+                                                    d="M53,16H11a1,1,0,0,0-1,1.068L12.67,56.427A6.021,6.021,0,0,0,18.655,62h26.69a6.022,6.022,0,0,0,5.985-5.576L54,17.068A1,1,0,0,0,53,16Z">
+                                                </path>
+                                            </g>
+                                        </svg>
+                                        <a href="delete?id={{plot.id}}">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 {% elif plot.type == "P" %}
-                <div class="card-container" onclick='location.href="/create?graph-type=piechartid={{ plot.id }}"'>
+                <div class="card-container" onclick='location.href="/create?graph-type=piechart&id={{ plot.id }}"'>
                     <div class="card">
                         <div class="image-container">
                             <img src="{% static 'main/pie-chart.svg' %}">
