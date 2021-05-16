@@ -223,7 +223,6 @@
                     Custom Elements for making graph 
                     Add if conditions here for each element according to the graph type
                 -->
-<<<<<<< HEAD
                     {% if graphType == "bargraph" %}
                     <compound-data-editor id="data-editor"></compound-data-editor>
                     <script src="{% static 'main/scripts/compound-data-editor.js' %}"></script>
@@ -247,21 +246,6 @@
             }
         </script>
         {% endif %}
-=======
-                        {% if graphType == "bargraph" %}
-                        <bargraph-data-editor></bargraph-data-editor>
-                        {% elif graphType == "piechart" %}
-                        <piechart-data-editor></piechart-data-editor>
-                        {% elif graphType == "linegraph" %}
-                        <linegraph-data-editor></linegraph-data-editor>
-                        {% elif graphType == "scatterplot" %}
-                        <scatterplot-data-editor></scatterplot-data-editor>
-                        {% endif %}
-                    </div>
-                </div>
-            </form>
-            {% endif %}
->>>>>>> 1495c26829a584ed765e368220dbb20eae3fed50
     </div>
 </main>
 {% endblock content %}
