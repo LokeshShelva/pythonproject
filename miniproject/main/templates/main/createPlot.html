@@ -5,6 +5,7 @@
 {% block style %}
 <link type="text/css" href="{% static 'main/styles/createPlot.css' %}" rel="stylesheet">
 <link type="text/css" href="{% static 'main/styles/site-header.css' %}" rel="stylesheet">
+<link type="text/css" href="{% static 'main/styles/data-editor.css' %}" rel="stylesheet">
 {% endblock style %}
 
 {% block content %}
@@ -191,22 +192,28 @@
                     Add if conditions here for each element according to the graph type
                 -->
                     {% if graphType == "bargraph" %}
-                    <bargraph-data-editor></bargraph-data-editor>
+                    <compound-data-editor id="data-editor"></compound-data-editor>
+                    <script src="{% static 'main/scripts/compound-data-editor.js' %}"></script>
                     {% elif graphType == "piechart" %}
-                    <piechart-data-editor></piechart-data-editor>
+                    <single-data-editor id="data-editor"></single-data-editor>
+                    <script src="{% static 'main/scripts/single-data-editor.js' %}"></script>
                     {% elif graphType == "linegraph" %}
-                    <linegraph-data-editor></linegraph-data-editor>
+                    <point-data-editor id="data-editor"></-data-editor>
                     {% elif graphType == "scatterplot" %}
-                    <scatterplot-data-editor></scatterplot-data-editor>
+                    <point-data-editor id="data-editor"></point-data-editor>
                     {% endif %}
                 </div>
             </div>
         </form>
+        <script defer>
+            var data = JSON.parse("{{data|escapejs}}");
+            console.log(data);
+            let editor = document.querySelector("#data-editor");
+            if(editor){
+                editor.setData(data);
+            }
+        </script>
         {% endif %}
     </div>
 </main>
-<script>
-    var data = JSON.parse("{{data|escapejs}}");
-    console.log(data)
-</script>
 {% endblock content %}

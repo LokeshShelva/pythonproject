@@ -1,0 +1,185 @@
+
+.table-wrapper {
+    --size:2.5rem;
+    width : 100% ;
+    height: 100% ;
+    overflow: auto ;
+    min-height: var(--size) ;
+    padding-bottom: 1rem ;
+}
+
+.table-wrapper table {
+    border-collapse: collapse ;
+}
+
+.table-wrapper table svg {
+    fill : var(--secondary);
+}
+
+.table-wrapper table td {
+    border:2px solid var(--neutral-300);
+    height: var(--size) ;
+    text-align: center ;
+    color: var(--secondary);
+}
+
+.table-wrapper table td:last-child {
+    padding: 0 ;
+}
+
+.table-wrapper table thead td {
+    white-space: nowrap ;
+    font-weight: 500 ;
+    background-color: var(--neutral-100);
+}
+
+.table-wrapper table thead td:is(:first-child,:last-child) {
+    min-width: var(--size) ;
+    padding: 0 ;
+}
+
+.table-wrapper table thead td:not(:first-child,:last-child) {
+    min-width: 10ch ;
+}
+
+.table-wrapper table tfoot td:not(:first-child) {
+    border-left: 0 ;
+    border-right: 0 ;
+}
+
+.table-wrapper table tfoot td:last-child {
+    border-right: 2px solid var(--neutral-300) ;
+}
+
+.table-wrapper table tbody td:nth-child(2) {
+    padding: 0 0.5rem ;
+    text-align: left ;
+}
+
+.table-wrapper table.line-data-editor tbody td:nth-child(2) {
+    text-align: center ;
+}
+
+.table-wrapper table.no-padding tbody td:nth-child(2) {
+    padding: 0 ;
+}
+
+.add-row-btn , .add-field-btn {
+    white-space: nowrap ;
+    cursor: pointer ;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.add-field-btn , .delete-row-btn {
+    width: var(--size) ;
+    height: var(--size) ;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.add-row-btn {
+    font-size: 0.8rem ;
+    font-weight: 700 ;
+    text-transform: uppercase ;
+    margin-left: 0.25rem ;
+    border-radius: 4px ;
+    padding: 0.25rem 0.5rem ;
+}
+
+.add-row-btn:hover {
+    background-color: var(--neutral-100);
+}
+
+.delete-row-btn {
+    opacity: 0 ;
+    cursor: pointer ;
+}
+
+tr:hover .delete-row-btn {
+    opacity: 1 ;
+}
+
+.entry-row , .field-row {
+    display: flex ;
+    width: 100% ;
+    height: var(--size) ;
+    align-items: center ;
+}
+
+.entry-row [data-name="label"] {
+    flex:1;
+    padding: 0 0.5rem ;
+    line-height: var(--size) ;
+    text-align: left ;
+}
+
+.entry-row [data-name="color"], 
+.field-row [data-name="color"] {
+    width: var(--size) ;
+    flex: 0 0 var(--size) ;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    opacity: 0 ;
+}
+
+.no-hiding .entry-row [data-name="color"],
+.no-hiding .field-row [data-name="color"] {
+    opacity: 1 ;
+}
+
+.entry-row:is(:hover,:focus-within,:focus) [data-name="color"], 
+.field-row:is(:hover,:focus-within,:focus) [data-name="color"] {
+    opacity: 1 ;
+}
+
+.entry-row [data-name="color"] input[type="color"],
+.field-row [data-name="color"] input[type="color"] {
+    display: block ;
+    width: 1.5rem ;
+    height: 1.5rem ;
+    padding: 0 ;
+    margin: 0 ;
+    border-radius: 4px ;
+    overflow: hidden ;
+    border: 0 ;
+    cursor: pointer ;
+}
+
+.entry-row [data-name="color"] input[type="color"]::-webkit-color-swatch-wrapper,
+.field-row [data-name="color"] input[type="color"]::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+.entry-row [data-name="color"] input[type="color"]::-webkit-color-swatch,
+.field-row [data-name="color"] input[type="color"]::-webkit-color-swatch {
+	border: none;
+}
+
+.field-row [data-name="field"] {
+    flex: 1 ;
+    padding: 0 0.5rem ;
+}
+
+.field-row .delete-field-btn {
+    flex: 0 0 var(--size) ;
+    width: var(--size) ;
+    opacity: 0 ;
+    cursor: pointer ;
+}
+
+.field-row:is(:hover,:focus-within,:focus) .delete-field-btn {
+    opacity: 1 ;
+}
+
+.delete-field-btn {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+[data-name="value"] {
+    min-width: 8ch ;
+}
