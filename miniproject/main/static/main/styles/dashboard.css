@@ -53,6 +53,7 @@ main {
    transform: scale(1.025);
 }
 
+
 .show {
     display:block;
 }
@@ -110,15 +111,88 @@ main {
 }
 
 .card-container{
-    transition: all .4s ease;
+    transition: all .5s ease;
 }
 
 .card-container:hover{
-    transform: scale(1.05);
+    /* transform: scale(1.05); */
     cursor: pointer;
     box-shadow: 2px 2px 4px var(--neutral-500);
 }
 
 .text{
     color: var(--secondary);
+}
+
+.name-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.name-container .graph-name{
+    min-height: 30px;
+    min-width: 90%;
+}
+
+.name-container .dropdown-icon{
+    margin-top: 0.5rem;
+    position: relative;
+}
+
+.dropdown-btn{
+    background-color: #fff;
+    border: none;
+}
+
+.dropdown-btn :hover{
+    cursor: pointer;
+}
+
+.dropdown-icon svg{
+    fill: var(--secondary);
+}
+
+.dropdown-options{
+    display: none;
+    position: absolute;
+    background-color: var(--neutral-100);
+    min-width: 100px;
+    box-shadow: 0 2px 4px 2px var(--neutral-300);
+    transform: translateX(-3rem);
+    z-index: 1;
+    --fill: var(--secondary);
+}
+
+.dropdown-options a {
+    color: var(--fill);
+    font-size: 14px;
+    padding: 12px 16px 12px 8px;
+    text-decoration: none;
+    display: block;
+    font-weight: bold;
+}
+
+.dropdown-option:hover {
+    transform: scale(1.025);
+    color: var(--primary);
+    --fill: var(--primary);
+}
+
+.dropdown-option .nc-icon-wrapper{
+    fill: var(--fill);
+}
+
+.dropdown-options .dropdown-option{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.dropdown-option svg{
+    margin-left: 16px;
+}
+
+.show-options{
+    display: block;
 }

@@ -14,8 +14,10 @@
             <div class="header-content">
                 <div class="header-title">
                     <div class="site-logo">
-                        <svg enable-background="new 0 0 512 512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-                            <path d="m57.302 227.714c-7.811-7.811-7.811-20.475 0-28.285l117.099-117.099c7.811-7.809 20.474-7.811 28.284 0l73.628 73.628 115.958-115.958h-51.376c-11.046 0-20-8.954-20-20s8.954-20 20-20h99.65c11.225-.006 20.01 9.171 20.01 20v99.66c0 11.046-8.954 20-20 20s-20-8.954-20-20v-51.375l-130.1 130.1c-7.811 7.811-20.474 7.811-28.284 0l-73.628-73.628-102.957 102.957c-7.81 7.811-20.475 7.809-28.284 0zm85.587 146.286v118c0 11.046-8.954 20-20 20h-102.889c-11.046 0-20-8.954-20-20v-118c0-11.046 8.954-20 20-20h102.889c11.046 0 20 8.954 20 20zm-40 20h-62.889v78h62.889zm224.555-96.074v194.074c0 11.046-8.954 20-20 20h-102.888c-11.046 0-20-8.954-20-20v-194.074c0-11.046 8.954-20 20-20h102.889c11.045 0 19.999 8.954 19.999 20zm-40 20h-62.889v154.074h62.889zm224.556-96.073v270.147c0 11.046-8.954 20-20 20h-102.889c-11.046 0-20-8.954-20-20v-270.147c0-11.046 8.954-20 20-20h102.889c11.046 0 20 8.954 20 20zm-40 20h-62.889v230.147h62.889z"/>
+                        <svg enable-background="new 0 0 512 512" viewBox="0 0 512 512"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="m57.302 227.714c-7.811-7.811-7.811-20.475 0-28.285l117.099-117.099c7.811-7.809 20.474-7.811 28.284 0l73.628 73.628 115.958-115.958h-51.376c-11.046 0-20-8.954-20-20s8.954-20 20-20h99.65c11.225-.006 20.01 9.171 20.01 20v99.66c0 11.046-8.954 20-20 20s-20-8.954-20-20v-51.375l-130.1 130.1c-7.811 7.811-20.474 7.811-28.284 0l-73.628-73.628-102.957 102.957c-7.81 7.811-20.475 7.809-28.284 0zm85.587 146.286v118c0 11.046-8.954 20-20 20h-102.889c-11.046 0-20-8.954-20-20v-118c0-11.046 8.954-20 20-20h102.889c11.046 0 20 8.954 20 20zm-40 20h-62.889v78h62.889zm224.555-96.074v194.074c0 11.046-8.954 20-20 20h-102.888c-11.046 0-20-8.954-20-20v-194.074c0-11.046 8.954-20 20-20h102.889c11.045 0 19.999 8.954 19.999 20zm-40 20h-62.889v154.074h62.889zm224.556-96.073v270.147c0 11.046-8.954 20-20 20h-102.889c-11.046 0-20-8.954-20-20v-270.147c0-11.046 8.954-20 20-20h102.889c11.046 0 20 8.954 20 20zm-40 20h-62.889v230.147h62.889z" />
                         </svg>
                     </div>
                     <h3 class="app-name">DataViz</h3>
@@ -57,11 +59,11 @@
                         Create
                     </button>
                     <div class="dropdown-content">
-                        <a href="/create?graph-type=bargraph">Bar Graph</a>
-                        <a href="/create?graph-type=compoundbargraph">Compound Bar Chart</a>
-                        <a href="/create?graph-type=linegraph">Line Graph</a>
-                        <a href="/create?graph-type=piechart">Pie Chart</a>
-                        <a href="/create?graph-type=scatterplot">Scatter Plot</a>
+                        <a href="/create?graph-type=bargraph&edit=true">Bar Graph</a>
+                        <a href="/create?graph-type=compoundbargraph&edit=true">Compound Bar Chart</a>
+                        <a href="/create?graph-type=linegraph&edit=true">Line Graph</a>
+                        <a href="/create?graph-type=piechart&edit=true">Pie Chart</a>
+                        <a href="/create?graph-type=scatterplot&edit=true">Scatter Plot</a>
                     </div>
                 </div>
             </div>
@@ -69,42 +71,216 @@
                 {% for plot in plots %}
                 {% if plot.type == "B" or plot.type == "C" %}
                 <div class="card-container">
-                    <div id="{{ plot.id }}" class="card"
-                        onclick="location.href = `/create?graph-type=bargraph&id=${event.currentTarget.id}`">
+                    <div class="card" onclick='location.href = "/create?graph-type=bargraph&id={{ plot.id }}"'>
                         <div class="image-container">
                             <img src="{% static 'main/bar-graph.svg' %}">
                         </div>
-                        <div class="graph-name">{{ plot.name }}</div>
+                        <div class="name-container">
+                            <div class="graph-name">
+                                {{ plot.name }}
+                            </div>
+                            <div class="dropdown-icon">
+                                <button class=" dropdown-btn" onclick='showOption(event, "{{plot.id}}")'>
+                                    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <g class="nc-icon-wrapper">
+                                            <path
+                                                d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+                                                fill="#212121"></path>
+                                        </g>
+                                    </svg>
+                                </button>
+                                <div class="dropdown-options" id="option-{{ plot.id }}">
+                                    <div class="dropdown-option">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14"
+                                            viewBox="0 0 12 12">
+                                            <g class="nc-icon-wrapper">
+                                                <path
+                                                    d="M11.707,1.879,10.121.293a1,1,0,0,0-1.414,0L7.354,1.646l3,3,1.353-1.353A1,1,0,0,0,11.707,1.879Z"
+                                                    data-color="color-2"></path>
+                                                <polygon points="6.646 2.354 1 8 0 12 4 11 9.646 5.354 6.646 2.354">
+                                                </polygon>
+                                            </g>
+                                        </svg>
+                                        <a href="create?graph-type=bargraph&id={{ plot.id }}&edit=true">Edit</a>
+                                    </div>
+                                    <div class="dropdown-option">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14"
+                                            viewBox="0 0 64 64">
+                                            <g class="nc-icon-wrapper">
+                                                <path data-color="color-2"
+                                                    d="M60,12H43V6a4,4,0,0,0-4-4H25a4,4,0,0,0-4,4v6H4a1,1,0,0,0,0,2H60a1,1,0,0,0,0-2ZM23,6a2,2,0,0,1,2-2H39a2,2,0,0,1,2,2v6H23Z">
+                                                </path>
+                                                <path
+                                                    d="M53,16H11a1,1,0,0,0-1,1.068L12.67,56.427A6.021,6.021,0,0,0,18.655,62h26.69a6.022,6.022,0,0,0,5.985-5.576L54,17.068A1,1,0,0,0,53,16Z">
+                                                </path>
+                                            </g>
+                                        </svg>
+                                        <a href="delete?id={{plot.id}}">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 {% elif plot.type == "P" %}
-                <div id="{{ plot.id }}" class="card-container"
-                    onclick="location.href = `/create?graph-type=piechart&id=${event.currentTarget.id}`">
+                <div class="card-container" onclick='location.href="/create?graph-type=bargraph&id={{ plot.id }}"'>
                     <div class="card">
                         <div class="image-container">
                             <img src="{% static 'main/pie-chart.svg' %}">
                         </div>
-                        <div class="graph-name">{{ plot.name }}</div>
+                        <div class="name-container">
+                            <div class="graph-name">
+                                {{ plot.name }}
+                            </div>
+                            <div class="dropdown-icon">
+                                <button class=" dropdown-btn" onclick='showOption(event, "{{plot.id}}")'>
+                                    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <g class="nc-icon-wrapper">
+                                            <path
+                                                d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+                                                fill="#212121"></path>
+                                        </g>
+                                    </svg>
+                                </button>
+                                <div class="dropdown-options" id="option-{{ plot.id }}">
+                                    <div class="dropdown-option">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14"
+                                            viewBox="0 0 12 12">
+                                            <g class="nc-icon-wrapper">
+                                                <path
+                                                    d="M11.707,1.879,10.121.293a1,1,0,0,0-1.414,0L7.354,1.646l3,3,1.353-1.353A1,1,0,0,0,11.707,1.879Z"
+                                                    data-color="color-2"></path>
+                                                <polygon points="6.646 2.354 1 8 0 12 4 11 9.646 5.354 6.646 2.354">
+                                                </polygon>
+                                            </g>
+                                        </svg>
+                                        <a href="create?graph-type=piechart&id={{ plot.id }}&edit=true">Edit</a>
+                                    </div>
+                                    <div class="dropdown-option">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14"
+                                            viewBox="0 0 64 64">
+                                            <g class="nc-icon-wrapper">
+                                                <path data-color="color-2"
+                                                    d="M60,12H43V6a4,4,0,0,0-4-4H25a4,4,0,0,0-4,4v6H4a1,1,0,0,0,0,2H60a1,1,0,0,0,0-2ZM23,6a2,2,0,0,1,2-2H39a2,2,0,0,1,2,2v6H23Z">
+                                                </path>
+                                                <path
+                                                    d="M53,16H11a1,1,0,0,0-1,1.068L12.67,56.427A6.021,6.021,0,0,0,18.655,62h26.69a6.022,6.022,0,0,0,5.985-5.576L54,17.068A1,1,0,0,0,53,16Z">
+                                                </path>
+                                            </g>
+                                        </svg>
+                                        <a href="delete?id={{plot.id}}">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 {% elif plot.type == "L" %}
                 <div id="{{ plot.id }}" class="card-container"
-                    onclick="location.href = `/create?graph-type=linegraph&id=${event.currentTarget.id}`">
+                    onclick='location.href = "/create?graph-type=bargraph&id={{ plot.id }}"'>
                     <div class="card">
                         <div class="image-container">
                             <img src="{% static 'main/line-chart.svg' %}">
                         </div>
-                        <div class="graph-name">{{ plot.name }}</div>
+                        <div class="name-container">
+                            <div class="graph-name">
+                                {{ plot.name }}
+                            </div>
+                            <div class="dropdown-icon">
+                                <button class=" dropdown-btn" onclick='showOption(event, "{{plot.id}}")'>
+                                    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <g class="nc-icon-wrapper">
+                                            <path
+                                                d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+                                                fill="#212121"></path>
+                                        </g>
+                                    </svg>
+                                </button>
+                                <div class="dropdown-options" id="option-{{ plot.id }}">
+                                    <div class="dropdown-option">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14"
+                                            viewBox="0 0 12 12">
+                                            <g class="nc-icon-wrapper">
+                                                <path
+                                                    d="M11.707,1.879,10.121.293a1,1,0,0,0-1.414,0L7.354,1.646l3,3,1.353-1.353A1,1,0,0,0,11.707,1.879Z"
+                                                    data-color="color-2"></path>
+                                                <polygon points="6.646 2.354 1 8 0 12 4 11 9.646 5.354 6.646 2.354">
+                                                </polygon>
+                                            </g>
+                                        </svg>
+                                        <a href="create?graph-type=linegraph&id={{ plot.id }}&edit=true">Edit</a>
+                                    </div>
+                                    <div class="dropdown-option">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14"
+                                            viewBox="0 0 64 64">
+                                            <g class="nc-icon-wrapper">
+                                                <path data-color="color-2"
+                                                    d="M60,12H43V6a4,4,0,0,0-4-4H25a4,4,0,0,0-4,4v6H4a1,1,0,0,0,0,2H60a1,1,0,0,0,0-2ZM23,6a2,2,0,0,1,2-2H39a2,2,0,0,1,2,2v6H23Z">
+                                                </path>
+                                                <path
+                                                    d="M53,16H11a1,1,0,0,0-1,1.068L12.67,56.427A6.021,6.021,0,0,0,18.655,62h26.69a6.022,6.022,0,0,0,5.985-5.576L54,17.068A1,1,0,0,0,53,16Z">
+                                                </path>
+                                            </g>
+                                        </svg>
+                                        <a href="delete?id={{plot.id}}">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 {% elif plot.type == "S" %}
                 <div id="{{ plot.id }}" class="card-container"
-                    onclick="location.href = `/create?graph-type=scatterplot&id=${event.currentTarget.id}`">
+                    onclick='location.href = "/create?graph-type=bargraph&id={{ plot.id }}"'>
                     <div class="card">
                         <div class="image-container">
                             <img src="{% static 'main/chart.svg' %}">
                         </div>
-                        <div class="graph-name">{{ plot.name }}</div>
+                        <div class="name-container">
+                            <div class="graph-name">
+                                {{ plot.name }}
+                            </div>
+                            <div class="dropdown-icon">
+                                <button class=" dropdown-btn" onclick='showOption(event, "{{plot.id}}")'>
+                                    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <g class="nc-icon-wrapper">
+                                            <path
+                                                d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+                                                fill="#212121"></path>
+                                        </g>
+                                    </svg>
+                                </button>
+                                <div class="dropdown-options" id="option-{{ plot.id }}">
+                                    <div class="dropdown-option">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14"
+                                            viewBox="0 0 12 12">
+                                            <g class="nc-icon-wrapper">
+                                                <path
+                                                    d="M11.707,1.879,10.121.293a1,1,0,0,0-1.414,0L7.354,1.646l3,3,1.353-1.353A1,1,0,0,0,11.707,1.879Z"
+                                                    data-color="color-2"></path>
+                                                <polygon points="6.646 2.354 1 8 0 12 4 11 9.646 5.354 6.646 2.354">
+                                                </polygon>
+                                            </g>
+                                        </svg>
+                                        <a href="create?graph-type=scatterplot&id={{ plot.id }}&edit=true">Edit</a>
+                                    </div>
+                                    <div class="dropdown-option">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14"
+                                            viewBox="0 0 64 64">
+                                            <g class="nc-icon-wrapper">
+                                                <path data-color="color-2"
+                                                    d="M60,12H43V6a4,4,0,0,0-4-4H25a4,4,0,0,0-4,4v6H4a1,1,0,0,0,0,2H60a1,1,0,0,0,0-2ZM23,6a2,2,0,0,1,2-2H39a2,2,0,0,1,2,2v6H23Z">
+                                                </path>
+                                                <path
+                                                    d="M53,16H11a1,1,0,0,0-1,1.068L12.67,56.427A6.021,6.021,0,0,0,18.655,62h26.69a6.022,6.022,0,0,0,5.985-5.576L54,17.068A1,1,0,0,0,53,16Z">
+                                                </path>
+                                            </g>
+                                        </svg>
+                                        <a href="delete?id={{plot.id}}">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 {% endif %}
@@ -120,15 +296,23 @@
         document.querySelector(".dropdown-content").classList.toggle("show")
     }
 
+    function showOption(event, id) {
+        event.stopPropagation();
+        document.querySelector(`#option-${id}`).classList.toggle("show-options")
+    }
+
     window.onclick = function (event) {
         if (!event.target.matches('#dropdown-btn')) {
             let dropdowns = document.getElementsByClassName("dropdown-content");
-            let i;
-            for (i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
+            for (let i = 0; i < dropdowns.length; i++) {
+                let openDropdown = dropdowns[i];
                 if (openDropdown.classList.contains('show')) {
                     openDropdown.classList.remove('show');
                 }
+            }
+            dropdowns = document.getElementsByClassName("dropdown-options")
+            for (let i = 0; i < dropdowns.length; i++) {
+                dropdowns[i].classList.remove("show-options")
             }
         }
     }

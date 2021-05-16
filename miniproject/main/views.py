@@ -4,6 +4,7 @@ from .models import Plot
 from bson.objectid import ObjectId
 from .plotter import plotter
 from .dataAPI import data_API
+from json import dumps
 
 
 @login_required
@@ -93,11 +94,17 @@ def create(request):
     if request.method == "POST":
         print(data_API(request.POST))
 
+    if plot[0]:
+        jsonData = dumps(plot[0]['data'])
+    else:
+        jsonData = dumps({})
+
     context = {
         "graphType": graphType,
         "graphId": graphId,
         "edit": isedit,
         "plot": div,
         "graphData": plot[0],
+        "data": jsonData,
     }
     return render(request, 'main/createPlot.html', context)

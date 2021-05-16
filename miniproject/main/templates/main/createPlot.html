@@ -19,10 +19,12 @@
                     </svg>
                 </div>
                 <h3 class="app-name">DataViz</h3>
-                {% if edit == "false" %}
+                {% if edit == "false" and graphId == "" %}
                 <span>| Create Graph</span>
-                {% else %}
+                {% elif edit == "true" %}
                 <span>| Edit Graph</span>
+                {% elif edit == "false" and graphId != "" %}
+                <span>| View Graph</span>
                 {% endif %}
             </div>
             <div class="gap"></div>
@@ -62,7 +64,7 @@
             {{ plot | safe }}
         </div>
         {% endif %}
-        {% if edit == "false" %}
+        {% if edit == "true" %}
         <!-- change edit value after development -->
         <form method="POST" id="graph-form" action="?graph-type={{ graphType }}&id={{ graphId }}&edit=true">
             {% csrf_token %}
@@ -87,7 +89,7 @@
                     </div>
                 </div>
             </div>
-
+            {% if graphType != "piechart" %}
             <div class="block-row">
                 <div class="block">
                     <div class="block-header">
@@ -177,6 +179,7 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
 
             <div class="block">
                 <div class="block-header">
@@ -202,4 +205,8 @@
         {% endif %}
     </div>
 </main>
+<script>
+    var data = JSON.parse("{{data|escapejs}}");
+    console.log(data)
+</script>
 {% endblock content %}
