@@ -1,3 +1,5 @@
+import ast
+
 
 def data_API(data, user):
     if user:
@@ -17,7 +19,7 @@ def data_API(data, user):
                 "minRange": data["yAxisMinRange"],
                 "maxRange": data["yAxisMaxRange"]
             },
-            "data": []
+            "data": ast.literal_eval(data["data"]),
         }
     else:
         cleaned = {
@@ -35,7 +37,7 @@ def data_API(data, user):
                 "minRange": data["yAxisMinRange"],
                 "maxRange": data["yAxisMaxRange"]
             },
-            "data": []
+            "data": ast.literal_eval(data["data"]),
         }
 
     return cleaned

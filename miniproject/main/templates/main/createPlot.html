@@ -64,7 +64,7 @@
                     </svg>
                     Cancel
                 </button>
-                <button class="btn filled-btn icon-btn logout-btn" type="submit" form="graph-form">
+                <button class="btn filled-btn icon-btn logout-btn" type="submit" onclick="getData()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <title>ic_save_24px</title>
                         <g>
@@ -237,17 +237,28 @@
                     <script src="{% static 'main/scripts/point-data-editor.js' %}"></script>
                     {% endif %}
                 </div>
-            </div>
-        </form>
-        <script defer>
-            var data = JSON.parse("{{data|escapejs}}");
-            console.log(data);
-            let editor = document.querySelector("#data-editor");
-            if(editor){
-                editor.setData(data);
-            }
-        </script>
-        {% endif %}
+            </form>
+            <script defer>
+                var data = JSON.parse("{{data|escapejs}}");
+                let editor = document.querySelector("#data-editor");
+                let id = "{{graphId|escapejs}}"
+
+                if (id != '') {
+                    editor.setData(data);
+                }
+
+                function getData() {
+                    let formEl = document.getElementById('graph-form');
+                    let formData = new FormData(formEl);
+                    let req = new XMLHttpRequest();
+                    req.open("POST", '/add/?type={{graphType|escapejs}}')
+                    formData.append('data', JSON.stringify(editor.getData()))
+                    req.send(formData);
+                    // location.href = "/"
+                }
+
+            </script>
+            {% endif %}
     </div>
 </main>
 {% endblock content %}

@@ -114,5 +114,13 @@ def delete(request):
 
 def add(request):
     data = data_API(request.POST, request.user)
+    ref_dict = {
+        "bargraph": "B",
+        "linegraph": "L",
+        "compountbargraph": "C",
+        "scatterplot": "S",
+        "piechart": "P"
+    }
+    data['type'] = ref_dict[request.GET.get('type')]
     uploaded = Plot.objects.create(**data)
     return redirect('home')
