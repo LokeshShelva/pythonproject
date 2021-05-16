@@ -223,20 +223,23 @@
                     Custom Elements for making graph 
                     Add if conditions here for each element according to the graph type
                 -->
-                    {% if graphType == "bargraph" %}
-                    <compound-data-editor id="data-editor"></compound-data-editor>
-                    <script src="{% static 'main/scripts/compound-data-editor.js' %}"></script>
-                    {% elif graphType == "piechart" %}
-                    <single-data-editor id="data-editor"></single-data-editor>
-                    <script src="{% static 'main/scripts/single-data-editor.js' %}"></script>
-                    {% elif graphType == "linegraph" %}
-                    <point-data-editor id="data-editor"></-data-editor>
-                    <script src="{% static 'main/scripts/point-data-editor.js' %}"></script>
-                    {% elif graphType == "scatterplot" %}
-                    <point-data-editor id="data-editor"></point-data-editor>
-                    <script src="{% static 'main/scripts/point-data-editor.js' %}"></script>
-                    {% endif %}
-                </div>
+                        {% if graphType == "compoundbargraph" %}
+                        <compound-data-editor id="data-editor"></compound-data-editor>
+                        <script src="{% static 'main/scripts/compound-data-editor.js' %}"></script>
+                        {% elif graphType == "bargraph" %}
+                        <single-data-editor id="data-editor"></single-data-editor>
+                        <script src="{% static 'main/scripts/single-data-editor.js' %}"></script>
+                        {% elif graphType == "piechart" %}
+                        <single-data-editor id="data-editor"></single-data-editor>
+                        <script src="{% static 'main/scripts/single-data-editor.js' %}"></script>
+                        {% elif graphType == "linegraph" %}
+                        <point-data-editor id="data-editor"></point-data-editor>
+                        <script src="{% static 'main/scripts/point-data-editor.js' %}"></script>
+                        {% elif graphType == "scatterplot" %}
+                        <point-data-editor id="data-editor"></point-data-editor>
+                        <script src="{% static 'main/scripts/point-data-editor.js' %}"></script>
+                        {% endif %}
+                    </div>
             </form>
             <script defer>
                 var data = JSON.parse("{{data|escapejs}}");
@@ -253,8 +256,26 @@
                     let req = new XMLHttpRequest();
                     req.open("POST", '/add/?type={{graphType|escapejs}}')
                     formData.append('data', JSON.stringify(editor.getData()))
-                    req.send(formData);
-                    // location.href = "/"
+                    if ("{{graphType|escapejs}}" == "piechart") {
+                        addData()
+                    }
+                    req.send(formData)
+                    req.onreadystatechange = function () {
+                        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                            window.location.replace("/")
+                        }
+                    }
+                    function addData() {
+                        formData.append("xAxisName", "")
+                        formData.append("xAxisUnit", "")
+                        formData.append("xAxisMinRange", "")
+                        formData.append("xAxisMaxRange", "")
+                        formData.append("yAxisName", "")
+                        formData.append("yAxisUnit", "")
+                        formData.append("yAxisMinRange", "")
+                        formData.append("yAxisMaxRange", "")
+                    }
+                    // window.location.replace("/")
                 }
 
             </script>

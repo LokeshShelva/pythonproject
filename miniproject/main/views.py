@@ -114,6 +114,7 @@ def delete(request):
 
 def add(request):
     data = data_API(request.POST, request.user)
+    print(request.POST)
     ref_dict = {
         "bargraph": "B",
         "linegraph": "L",

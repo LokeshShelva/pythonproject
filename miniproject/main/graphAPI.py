@@ -9,8 +9,8 @@ def Bar_API(graph_data):
     name, color, value = [], [], []
     for entry in dataSet:
         name.append(entry['name'])
-        color.append(ast.literal_eval(entry['color'])[0])
-        value.append(float(ast.literal_eval(entry['value'])[0]))
+        color.append(entry['color'])
+        value.append(float(entry['value']))
     df['data'] = value
     df['label'] = name
     df['color'] = color
