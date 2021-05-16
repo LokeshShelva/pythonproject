@@ -4,10 +4,125 @@
 {% block title %} Create plot {% endblock title %}
 {% block style %}
 <link type="text/css" href="{% static 'main/styles/createPlot.css' %}" rel="stylesheet">
+<link type="text/css" href="{% static 'main/styles/site-header.css' %}" rel="stylesheet">
 {% endblock style %}
 
 {% block content %}
-<div class="wrapper">
+{% comment %} <div class="wrapper">
     {{ plot | safe }}
-</div>
+</div> {% endcomment %}
+<header class="site-header">
+    <div class="content-wrapper">
+        <div class="header-content">
+            <div class="header-title">
+                <div class="site-logo">
+                    <svg enable-background="new 0 0 512 512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                        <path d="m57.302 227.714c-7.811-7.811-7.811-20.475 0-28.285l117.099-117.099c7.811-7.809 20.474-7.811 28.284 0l73.628 73.628 115.958-115.958h-51.376c-11.046 0-20-8.954-20-20s8.954-20 20-20h99.65c11.225-.006 20.01 9.171 20.01 20v99.66c0 11.046-8.954 20-20 20s-20-8.954-20-20v-51.375l-130.1 130.1c-7.811 7.811-20.474 7.811-28.284 0l-73.628-73.628-102.957 102.957c-7.81 7.811-20.475 7.809-28.284 0zm85.587 146.286v118c0 11.046-8.954 20-20 20h-102.889c-11.046 0-20-8.954-20-20v-118c0-11.046 8.954-20 20-20h102.889c11.046 0 20 8.954 20 20zm-40 20h-62.889v78h62.889zm224.555-96.074v194.074c0 11.046-8.954 20-20 20h-102.888c-11.046 0-20-8.954-20-20v-194.074c0-11.046 8.954-20 20-20h102.889c11.045 0 19.999 8.954 19.999 20zm-40 20h-62.889v154.074h62.889zm224.556-96.073v270.147c0 11.046-8.954 20-20 20h-102.889c-11.046 0-20-8.954-20-20v-270.147c0-11.046 8.954-20 20-20h102.889c11.046 0 20 8.954 20 20zm-40 20h-62.889v230.147h62.889z"/>
+                    </svg>
+                </div>
+                <h3 class="app-name">DataViz</h3>
+                <span>| Create Graph</span>
+            </div>
+            <div class="gap"></div>
+            <div class="action-btns">
+                <button class="btn hollow-btn icon-btn logout-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>ic_cancel_24px</title>
+                        <g>
+                            <path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"></path>
+                        </g>
+                    </svg>
+                    Cancel
+                </button>
+                <button class="btn filled-btn icon-btn logout-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>ic_save_24px</title>
+                        <g>
+                            <path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"></path>
+                        </g>
+                    </svg>
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="content-wrapper">
+        <div class="block">
+            <div class="block-header">
+                <div class="block-title">Graph Details</div>
+            </div>
+            <div class="block-body">
+                <div class="row-field">
+                    <label for="graph-title">Graph Title</label>
+                    <input id="graph-title" type="text" placeholder="Enter graph title">
+                </div>
+                <div class="row-field">
+                    <label for="graph-description">Graph Description</label>
+                    <textarea id="graph-description" placeholder="Enter description about graph"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="block-row">
+            <div class="block">
+                <div class="block-header">
+                    <div class="block-title">X Axis</div>
+                </div>
+                <div class="block-body">
+                    <div class="row-field">
+                        <label for="x-axis-name">Name</label>
+                        <input id="x-axis-name" type="text" placeholder="Enter axis name">
+                    </div>
+                    <div class="row-field">
+                        <label >Range</label>
+                        <div class="min-max-row">
+                            <input id="x-axis-min" type="text" placeholder="Min">
+                            <span>to</span>
+                            <input id="x-axis-max" type="text" placeholder="Max">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="block">
+                <div class="block-header">
+                    <div class="block-title">Y Axis</div>
+                </div>
+                <div class="block-body">
+                    <div class="row-field">
+                        <label for="y-axis-name">Name</label>
+                        <input id="y-axis-name" type="text" placeholder="Enter axis name">
+                    </div>
+                    <div class="row-field">
+                        <label >Range</label>
+                        <div class="min-max-row">
+                            <input id="y-axis-min" type="text" placeholder="Min">
+                            <span>to</span>
+                            <input id="y-axis-max" type="text" placeholder="Max">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="block">
+            <div class="block-header">
+                <div class="block-title">Graph Data</div>
+            </div>
+            <div class="block-body">
+                <!-- 
+                    Custom Elements for making graph 
+                    Add if conditions here for each element according to the graph type
+                -->
+                <bargraph-data-editor></bargraph-data-editor>
+                <piechart-data-editor></piechart-data-editor>
+                <linegraph-data-editor></linegraph-data-editor>
+                <scatterplot-data-editor></scatterplot-data-editor>
+            </div>
+        </div>
+        
+        
+    </div>
+</main>
 {% endblock content %}

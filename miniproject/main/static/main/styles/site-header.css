@@ -1,0 +1,70 @@
+
+.site-header {
+    width : 100% ;
+    height: 3.5rem ;
+    top: 0 ;
+    position: fixed ;
+    background-color: #fff ;
+    box-shadow: 0 0 6px var(--neutral-300);
+    z-index: 99 ;
+}
+
+.site-header .header-content {
+    width : 100% ;
+    height: 100% ;
+    display: flex ;
+    align-items: center ;
+}
+
+.site-header .header-content .header-title {
+    white-space: nowrap ;
+    display: flex ;
+    align-items: center ;
+}
+
+
+.site-header .header-content .header-title .site-logo {
+    width: 3rem ;
+    height: 3rem ;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.site-header .header-content .header-title .site-logo svg {
+    width: 1.5rem ;
+    fill: var(--secondary);
+}
+
+.site-header .header-content .header-title h3 {
+    display: inline ;
+}
+
+.site-header .header-content .header-title span {
+    color: var(--secondary);
+}
+
+.site-header .header-content .action-btns {
+    display: flex ;
+}
+
+.site-header .header-content .action-btns button {
+    padding: 0.35rem 0.5rem ;
+}
+
+.site-header .header-content .action-btns * + * {
+    margin-left: 0.5rem ;
+}
+
+@media screen and (max-width: 800px) {
+    .site-header .header-content .header-title h3 {
+        display: none ;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .site-header .header-content .header-title h3,
+    .site-header .header-content .header-title span {
+        display: none ;
+    }
+}
