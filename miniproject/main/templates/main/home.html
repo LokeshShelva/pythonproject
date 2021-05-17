@@ -124,7 +124,7 @@
                 </div>
                 {% elif plot.type == "C" %}
                 <div class="card-container">
-                    <div class="card" onclick='location.href = "/create?graph-type=compoundbargraphid={{ plot.id }}"'>
+                    <div class="card" onclick='location.href = "/create?graph-type=compoundbargraph&id={{ plot.id }}"'>
                         <div class="image-container">
                             <img src="{% static 'main/bar-graph.svg' %}">
                         </div>
