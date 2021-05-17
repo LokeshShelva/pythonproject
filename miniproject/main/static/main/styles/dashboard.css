@@ -126,12 +126,13 @@ main {
 }
 
 .grid-view .card-container .card .graph-name {
-    flex: 0 0 2rem ;
+    flex: 1 ;
     line-height: 2rem ;
     font-size: 0.9rem ;
     margin-top: 0.5rem ;
     color: var(--secondary);
     overflow: hidden ;
+    white-space: nowrap ;
     text-overflow: ellipsis ;
 }
 
