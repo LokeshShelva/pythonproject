@@ -32,3 +32,5 @@
 env/
 
 .vscode/
+
+miniproject/miniproject/settings.py
