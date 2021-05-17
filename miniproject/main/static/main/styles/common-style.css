@@ -43,7 +43,7 @@ h1,h2,h3,h4,h5,h6,h7 {
     font-family: "roboto",sans-serif;
 }
 
-input[type="text"] , input[type="password"] , input[type="email"] , textarea {
+input[type="text"] , input[type="password"] , input[type="email"], input[type="number"] , textarea {
     font-family: "roboto",sans-serif;
     font-weight: 400 ;
     font-size: 1rem ;
@@ -55,12 +55,14 @@ input[type="text"] , input[type="password"] , input[type="email"] , textarea {
     color: var(--secondary-light);
 }
 
-input[type="text"]::placeholder , input[type="password"]::placeholder , input[type="email"]::placeholder , textarea::placeholder {
+input[type="text"]::placeholder , input[type="password"]::placeholder 
+, input[type="email"]::placeholder , input[type="number"]::placeholder, textarea::placeholder {
     color: var(--neutral-500) ;
     font-weight: 400 ;
 }
 
-input[type="text"]:focus , input[type="password"]:focus , input[type="email"]:focus , textarea:focus {
+input[type="text"]:focus , input[type="password"]:focus , 
+input[type="email"]:focus ,input[type="number"]:focus, textarea:focus {
     border-color: transparent ;
     color: var(--secondary);
     box-shadow: 0 0 0 2px var(--primary);

@@ -38,14 +38,13 @@
                             </path>
                         </g>
                     </svg>
-                    Go Back
+                    Back
                 </button>
                 <button class="btn filled-btn icon-btn logout-btn" type="submit"
                     onclick="location.href = `{% url 'create' %}?graph-type={{ graphType }}&id={{ graphId }}&edit=true`">
-                    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <g class="nc-icon-wrapper">
-                            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z">
-                            </path>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>ic_mode_edit_24px</title>
+                        <g>
+                            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path>
                         </g>
                     </svg>
                     Edit
@@ -151,16 +150,16 @@
                                 <label>Range</label>
                                 <div class="min-max-row">
                                     {% if graphId == "" %}
-                                    <input id="x-axis-min" type="text" placeholder="Min" name="xAxisMinRange">
+                                    <input id="x-axis-min" type="number" placeholder="Min" name="xAxisMinRange" value="0">
                                     {% else %}
-                                    <input id="x-axis-min" type="text" placeholder="Min" name="xAxisMinRange"
+                                    <input id="x-axis-min" type="number" placeholder="Min" name="xAxisMinRange"
                                         value="{{ graphData.xAxis.minRange }}">
                                     {% endif %}
                                     <span>to</span>
                                     {% if graphId == "" %}
-                                    <input id="x-axis-max" type="text" placeholder="Max" name="xAxisMaxRange">
+                                    <input id="x-axis-max" type="number" placeholder="Max" name="xAxisMaxRange" value="100">
                                     {% else %}
-                                    <input id="x-axis-max" type="text" placeholder="Max" name="xAxisMaxRange"
+                                    <input id="x-axis-max" type="number" placeholder="Max" name="xAxisMaxRange"
                                         value="{{ graphData.xAxis.maxRange }}">
                                     {% endif %}
                                 </div>
@@ -195,16 +194,16 @@
                                 <label>Range</label>
                                 <div class="min-max-row">
                                     {% if graphId == "" %}
-                                    <input id="y-axis-min" type="text" placeholder="Min" name="yAxisMinRange">
+                                    <input id="y-axis-min" type="number" placeholder="Min" name="yAxisMinRange" value="0"> 
                                     {% else %}
-                                    <input id="y-axis-min" type="text" placeholder="Min" name="yAxisMinRange"
+                                    <input id="y-axis-min" type="number" placeholder="Min" name="yAxisMinRange"
                                         value="{{ graphData.yAxis.minRange }}">
                                     {% endif %}
                                     <span>to</span>
                                     {% if graphId == "" %}
-                                    <input id="y-axis-max" type="text" placeholder="Max" name="yAxisMaxRange">
+                                    <input id="y-axis-max" type="number" placeholder="Max" name="yAxisMaxRange" value="100">
                                     {% else %}
-                                    <input id="y-axis-max" type="text" placeholder="Max" name="yAxisMaxRange"
+                                    <input id="y-axis-max" type="number" placeholder="Max" name="yAxisMaxRange"
                                         value="{{ graphData.yAxis.maxRange }}">
                                     {% endif %}
                                 </div>
@@ -274,6 +273,7 @@
                             }
                         }
                     }
+                    
                     function addData() {
                         formData.append("xAxisName", "")
                         formData.append("xAxisUnit", "")

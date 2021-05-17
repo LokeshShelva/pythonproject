@@ -49,7 +49,7 @@
                 <h4 class="section-title">Your Graphs</h4>
                 <div class="gap"></div>
                 <div class="dropdown">
-                    <button class="btn borderless-btn icon-btn" id="dropdown-btn" onclick="create()">
+                    <button class="btn borderless-btn icon-btn" id="dropdown-btn" onclick="create(event)">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <title>ic_add_24px</title>
                             <g>
@@ -85,7 +85,7 @@
                                         <g class="nc-icon-wrapper">
                                             <path
                                                 d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
-                                                fill="#212121"></path>
+                                                ></path>
                                         </g>
                                     </svg>
                                 </button>
@@ -345,8 +345,10 @@
     </main>
 </div>
 <script>
-    function create() {
+    function create(event) {
         document.querySelector(".dropdown-content").classList.toggle("show")
+        document.querySelector(".dropdown-content").parentElement.classList.toggle("show");
+        event.stopPropagation();
     }
 
     function showOption(event, id) {
@@ -359,15 +361,17 @@
             let dropdowns = document.getElementsByClassName("dropdown-content");
             for (let i = 0; i < dropdowns.length; i++) {
                 let openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                }
+                openDropdown && openDropdown.classList.remove('show');
+                
             }
             dropdowns = document.getElementsByClassName("dropdown-options")
             for (let i = 0; i < dropdowns.length; i++) {
                 dropdowns[i].classList.remove("show-options")
             }
         }
+
+        let dropdownE = document.querySelector(".dropdown");
+        dropdownE && dropdownE.classList.remove("show");
     }
 </script>
 {% endblock content %}
