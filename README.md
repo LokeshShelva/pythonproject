@@ -1,4 +1,4 @@
-# Mini Project - DataVizpy
+# Mini Project - DataViz
 
 ## Instllation guide
 * Clone the repositary into the project folder.
