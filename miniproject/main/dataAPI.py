@@ -15,7 +15,7 @@ def data_API(data, user):
             },
             "yAxis": {
                 "name": data["yAxisName"],
-                "unit": data["xAxisUnit"],
+                "unit": data["yAxisUnit"],
                 "minRange": data["yAxisMinRange"],
                 "maxRange": data["yAxisMaxRange"]
             },
@@ -33,7 +33,7 @@ def data_API(data, user):
             },
             "yAxis": {
                 "name": data["yAxisName"],
-                "unit": data["xAxisUnit"],
+                "unit": data["yAxisUnit"],
                 "minRange": data["yAxisMinRange"],
                 "maxRange": data["yAxisMaxRange"]
             },
